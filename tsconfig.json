@@ -25,8 +25,10 @@
       "@tests/*": ["__tests__/*"],
       "@config/*": ["src/config/*"],
       "@domain/*": ["src/domain/*"],
-      "@controller/*": ["src/controller/*"],
-      "@middleware/*": ["src/middleware/*"]
+      "@controllers/*": ["src/controllers/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@repositories/*": ["src/repositories/*"],
+      "@features/*": ["src/@features/*"]
     }
   },
   "include": ["src/**/*", "__tests__/**/*"],

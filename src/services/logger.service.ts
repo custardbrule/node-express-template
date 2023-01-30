@@ -1,4 +1,4 @@
-import { defaultLevel } from '../config';
+import { defaultLevel } from '@server/config';
 import winston from 'winston';
 import 'winston-daily-rotate-file';
 

@@ -1,5 +1,5 @@
 import { Express } from 'express';
-import useGameLogController from './gameLog.controller';
+import useGameLogController from '@server/controllers/gameLog.controller';
 
 function useController(app: Express) {
   useGameLogController(app);
