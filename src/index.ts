@@ -3,7 +3,8 @@ env.config({ path: './.env' });
 import express from 'express';
 import cors from 'cors';
 import { applyWinstonLogging } from './middlewares';
-import white_list from './config/white_list';
+import { white_list } from './config';
+import useController from './controllers';
 
 const environment = process.env.NODE_ENV || 'development';
 
@@ -21,6 +22,8 @@ app.use(
 app.get('/', (_req, res) => {
   res.send('hello world');
 });
+
+useController(app);
 
 app.listen(port, () => {
   if (environment === 'development')

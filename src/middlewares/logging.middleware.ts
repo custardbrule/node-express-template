@@ -4,6 +4,7 @@ import 'winston-mongodb';
 import expressWinston from 'express-winston';
 import { Express, Request, Response } from 'express';
 import { transportFile } from '../services';
+import { defaultLevel } from '../config';
 
 export function applyWinstonLogging(app: Express): void {
   app.use(
@@ -12,8 +13,11 @@ export function applyWinstonLogging(app: Express): void {
         new winston.transports.Console(),
         transportFile,
         new winston.transports.MongoDB({
-          level: 'debug',
+          level: defaultLevel,
           db: process.env.MONGODB_CONNSTRING,
+          collection: 'logs',
+          capped: true,
+          metaKey: 'meta',
         }),
       ],
       format: winston.format.combine(

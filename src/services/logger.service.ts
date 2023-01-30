@@ -1,3 +1,4 @@
+import { defaultLevel } from '../config';
 import winston from 'winston';
 import 'winston-daily-rotate-file';
 
@@ -6,6 +7,7 @@ const transportFile = new winston.transports.DailyRotateFile({
   datePattern: 'YYYY-MM-DD',
   zippedArchive: true,
   maxSize: '20m',
+  level: defaultLevel,
 });
 
 const logger = winston.createLogger({
