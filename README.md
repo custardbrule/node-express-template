@@ -22,8 +22,9 @@ yarn
 yarn start
 ```
 
-```
 <!-- basically yarn start with nodemon -->
+
+```
 yarn dev
 ```
 
