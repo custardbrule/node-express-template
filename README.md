@@ -23,7 +23,7 @@ yarn start
 ```
 
 ```
-> basically yarn start with nodemon
+<!-- basically yarn start with nodemon -->
 yarn dev
 ```
 
