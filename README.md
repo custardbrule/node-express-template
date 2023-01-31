@@ -2,7 +2,7 @@
 
 ## Note
 
-Do not update or commit file gitlab-ci.yaml
+**Do not update or commit file gitlab-ci.yaml**
 
 ## Setup
 
@@ -10,17 +10,21 @@ Install mongodb, redis, yarn and update .env
 
 ## Run
 
-- [ ] Install dependencies with the following command:
+- [x] Install dependencies with the following command:
 
 ```
 yarn
 ```
 
-- [ ] other command:
+- [x] other command:
 
 ```
 yarn start
-yarn dev # basically yarn start with nodemon
+```
+
+```
+> basically yarn start with nodemon
+yarn dev
 ```
 
 ## Integrate with your tools
