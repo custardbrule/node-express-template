@@ -21,13 +21,20 @@ export function applyWinstonLogging(app: Express): void {
         }),
       ],
       format: winston.format.combine(
-        winston.format.colorize(),
+        winston.format.colorize({ all: true }),
+        winston.format.label({ label: '[LOGGER]' }),
+        winston.format.timestamp({ format: 'YY-MM-DD HH:mm:ss' }),
         winston.format.json(),
+        winston.format.printf(
+          (info) =>
+            ` ${info.label}  ${info.timestamp}  ${info.level} : ${info.message}
+            meta: ${JSON.stringify(info.meta, null, 2)}`,
+        ),
       ),
-      meta: false,
+      meta: true,
       msg: 'HTTP  ',
       expressFormat: true,
-      colorize: false,
+      colorize: true,
       ignoreRoute: function (_req: Request, _res: Response) {
         return false;
       },
