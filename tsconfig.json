@@ -28,7 +28,7 @@
       "@controllers/*": ["src/controllers/*"],
       "@middlewares/*": ["src/middlewares/*"],
       "@repositories/*": ["src/repositories/*"],
-      "@features/*": ["src/@features/*"]
+      "@features/*": ["src/features/*"]
     }
   },
   "include": ["src/**/*", "__tests__/**/*"],

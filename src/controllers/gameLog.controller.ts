@@ -1,4 +1,4 @@
-import { GetGameLogRequestHandler } from '@server/@features/game.log/queries/getGameLog.query';
+import { GetGameLogRequestHandler } from '@server/features/game.log/queries/getGameLog.query';
 import { Express } from 'express';
 
 const CONTROLLERNAME = 'GameLog';
