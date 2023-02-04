@@ -1,3 +1,7 @@
-import { gameLogSchema, gameLogSchemaName } from './gameLog.schema';
+import {
+  GameLogModel,
+  gameLogSchema,
+  gameLogSchemaName,
+} from './gameLog.schema';
 
-export { gameLogSchema, gameLogSchemaName };
+export { gameLogSchema, gameLogSchemaName, GameLogModel };

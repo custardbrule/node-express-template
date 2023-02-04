@@ -1,5 +1,11 @@
-import { GetGameLogRequestHandler } from '@server/features/game.log/queries/getGameLog.query';
-import { Express } from 'express';
+import { ValidateParallel } from '@server/features/common';
+import {
+  GetGameLogRequestHandler,
+  GetGameLogRequestValidator,
+} from '@server/features/game-log/queries/getGameLog.query';
+import { ResponseModel } from '@server/models';
+import { Express, Request, Response } from 'express';
+import { validationResult } from 'express-validator';
 
 const CONTROLLERNAME = 'GameLog';
 
@@ -20,13 +26,13 @@ function useGameLogController(app: Express) {
    *               userId:
    *                 type: string
    *                 description: The user's id.
-   *                 example: "0000-0000-0000-0000"
-   *               pageNumber:
+   *                 example: "63b45eb4-5cea-403d-8f41-24b4ed2b79c7"
+   *               page:
    *                 type: number
    *                 example: 1
-   *               pageSize:
+   *               size:
    *                 type: number
-   *                 example: 1
+   *                 example: 10
    *     responses:
    *       200:
    *         content:
@@ -49,10 +55,21 @@ function useGameLogController(app: Express) {
    *                       type: string
    *                       example: "title"
    */
-  app.post(`/${CONTROLLERNAME}`, async (_req, _res) => {
-    const data = await GetGameLogRequestHandler(_req.body);
-    _res.send(data);
-  });
+  app.post(
+    `/${CONTROLLERNAME}`,
+    ValidateParallel(GetGameLogRequestValidator()),
+    async (_req: Request, _res: Response) => {
+      const errors = validationResult(_req);
+      if (!errors.isEmpty()) {
+        const errRes = ResponseModel.ErrorResponse(errors.array());
+        return _res.status(400).send(errRes);
+      }
+
+      const data = await GetGameLogRequestHandler(_req.body);
+      const r = ResponseModel.CreateResponse(data);
+      return _res.send(r);
+    },
+  );
 
   return app;
 }

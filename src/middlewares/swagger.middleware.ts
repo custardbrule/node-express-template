@@ -33,7 +33,7 @@ function applySwaggerDoc(app: Express) {
 
   const specs = swaggerJsdoc(options);
 
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+  app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
 }
 
 export default applySwaggerDoc;

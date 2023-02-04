@@ -21,6 +21,7 @@ export function applyWinstonLogging(app: Express): void {
         }),
       ],
       format: winston.format.combine(
+        winston.format.errors({ stack: true }),
         winston.format.colorize({ all: true }),
         winston.format.label({ label: '[LOGGER]' }),
         winston.format.timestamp({ format: 'YY-MM-DD HH:mm:ss' }),

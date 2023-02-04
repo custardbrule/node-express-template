@@ -16,6 +16,7 @@ const logger = winston.createLogger({
     winston.format.colorize(),
     winston.format.json(),
   ),
+  level: 'debug',
 });
 
 export { transportFile };

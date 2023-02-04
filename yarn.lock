@@ -1513,6 +1513,17 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/body-parser-xml@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@types/body-parser-xml/-/body-parser-xml-2.0.2.tgz#79cdbeb41971c99e4d8f9874a0c8341422a87169"
+  integrity sha512-LlmFkP3BTfacofFevInpM8iZ6+hALZ9URUt5JpSw76irhHCdbqbcBtbxbu2MO8HUGoIROQ5wuB55rLS99xNgCg==
+  dependencies:
+    "@types/body-parser" "*"
+    "@types/connect" "*"
+    "@types/express-serve-static-core" "*"
+    "@types/node" "*"
+    "@types/xml2js" "*"
+
 "@types/body-parser@*":
   version "1.19.2"
   resolved "https://registry.npmjs.org/@types/body-parser/-/body-parser-1.19.2.tgz"
@@ -1540,7 +1551,7 @@
   resolved "https://registry.npmjs.org/@types/crypto-js/-/crypto-js-4.1.1.tgz"
   integrity sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==
 
-"@types/express-serve-static-core@^4.17.31":
+"@types/express-serve-static-core@*", "@types/express-serve-static-core@^4.17.31":
   version "4.17.33"
   resolved "https://registry.npmjs.org/@types/express-serve-static-core/-/express-serve-static-core-4.17.33.tgz"
   integrity sha512-TPBqmR/HRYI3eC2E5hmiivIzv+bidAfXofM+sbonAGvyDhySGw9/PQZFt2BLOrjUUR++4eJVpx6KnLQK1Fk9tA==
@@ -1658,6 +1669,13 @@
   dependencies:
     "@types/node" "*"
     "@types/webidl-conversions" "*"
+
+"@types/xml2js@*":
+  version "0.4.11"
+  resolved "https://registry.yarnpkg.com/@types/xml2js/-/xml2js-0.4.11.tgz#bf46a84ecc12c41159a7bd9cf51ae84129af0e79"
+  integrity sha512-JdigeAKmCyoJUiQljjr7tQG3if9NkqGUgwEUqBvV0N7LM4HyQk7UXCnusRa1lnvXAEYJ8mw8GtZWioagNztOwA==
+  dependencies:
+    "@types/node" "*"
 
 "@types/yargs-parser@*":
   version "21.0.0"
@@ -1945,6 +1963,13 @@ bl@^2.2.1:
   dependencies:
     readable-stream "^2.3.5"
     safe-buffer "^5.1.1"
+
+body-parser-xml@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/body-parser-xml/-/body-parser-xml-2.0.3.tgz#dba4461c5a0a5289612ced2e70442db11c38a615"
+  integrity sha512-tWvcAbh8QPd/lj+yfGZBMY/roof/e2iSXrJbYXYjxVhHQ88D2CF3AxDTdwhb9wcNdHVNbCttaWipchJPEs5r0g==
+  dependencies:
+    xml2js "^0.4.23"
 
 body-parser@1.20.1, body-parser@^1.20.1:
   version "1.20.1"
@@ -2577,6 +2602,14 @@ express-async-errors@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npmjs.org/express-async-errors/-/express-async-errors-3.1.1.tgz"
   integrity sha512-h6aK1da4tpqWSbyCa3FxB/V6Ehd4EEB15zyQq9qe75OZBp0krinNKuH4rAY+S/U/2I36vdLAUFSjQJ+TFmODng==
+
+express-validator@^6.14.3:
+  version "6.14.3"
+  resolved "https://registry.yarnpkg.com/express-validator/-/express-validator-6.14.3.tgz#50787258c1250ffb0e7a697f05e9f16aa2fd8084"
+  integrity sha512-c4b9NMdhskfcLbH/FchsSfCt4Vb14gKzcotG9zLS+VoOJDox57aGhCL+kmAu7cl+ytaSed+HD5jdJhel8DQsdg==
+  dependencies:
+    lodash "^4.17.21"
+    validator "^13.7.0"
 
 express-winston@^4.2.0:
   version "4.2.0"
@@ -3739,6 +3772,11 @@ mongodb@^3.6.2:
   optionalDependencies:
     saslprep "^1.0.0"
 
+mongoose-paginate-v2@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/mongoose-paginate-v2/-/mongoose-paginate-v2-1.7.1.tgz#0b390f5eb8e5dca55ffcb1fd7b4d8078636cb8f1"
+  integrity sha512-J8DJw3zRXcXOKoZv+RvO9tt5HotRnbo2iCR3lke+TtsQsYwQvbY3EgUkPqZXw6qCX2IByvXrW5SGNdAB0od/Cw==
+
 mongoose@^6.9.0:
   version "6.9.0"
   resolved "https://registry.npmjs.org/mongoose/-/mongoose-6.9.0.tgz"
@@ -4222,6 +4260,11 @@ saslprep@^1.0.0, saslprep@^1.0.3:
   integrity sha512-/MY/PEMbk2SuY5sScONwhUDsV2p77Znkb/q3nSVstq/yQzYJOH/Azh29p9oJLsl3LnQwSvZDKagDGBsBwSooag==
   dependencies:
     sparse-bitfield "^3.0.3"
+
+sax@>=0.6.0, sax@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
+  integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
 semver@7.x, semver@^7.3.5, semver@^7.3.7:
   version "7.3.8"
@@ -4824,6 +4867,26 @@ write-file-atomic@^5.0.0:
   dependencies:
     imurmurhash "^0.1.4"
     signal-exit "^3.0.7"
+
+xml-js@^1.6.11:
+  version "1.6.11"
+  resolved "https://registry.yarnpkg.com/xml-js/-/xml-js-1.6.11.tgz#927d2f6947f7f1c19a316dd8eea3614e8b18f8e9"
+  integrity sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g==
+  dependencies:
+    sax "^1.2.4"
+
+xml2js@^0.4.23:
+  version "0.4.23"
+  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.23.tgz#a0c69516752421eb2ac758ee4d4ccf58843eac66"
+  integrity sha512-ySPiMjM0+pLDftHgXY4By0uswI3SPKLDw/i3UXbnO8M/p28zqexCUoPmQFrYD+/1BzhGJSs2i1ERWKJAtiLrug==
+  dependencies:
+    sax ">=0.6.0"
+    xmlbuilder "~11.0.0"
+
+xmlbuilder@~11.0.0:
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-11.0.1.tgz#be9bae1c8a046e76b31127726347d0ad7002beb3"
+  integrity sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==
 
 y18n@^5.0.5:
   version "5.0.8"

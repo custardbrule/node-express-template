@@ -1,6 +1,10 @@
+import { PaginateModel } from 'mongoose';
 import database from './dbConnection';
-import { gameLogSchema, gameLogSchemaName } from './schemas';
+import { GameLogModel, gameLogSchema, gameLogSchemaName } from './schemas';
 
-const gameLogRepository = database.model(gameLogSchemaName, gameLogSchema);
+const gameLogRepository = database.model<
+  GameLogModel,
+  PaginateModel<GameLogModel>
+>(gameLogSchemaName, gameLogSchema);
 
 export default gameLogRepository;
