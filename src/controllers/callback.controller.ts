@@ -1,3 +1,4 @@
+import { GetBalanceCallbackHandler } from '@server/features/callback/getBalanceCallBack/balance.callback';
 import {
   TokenAuthenticationHandler,
   TokenAuthenticationRequest,
@@ -67,6 +68,67 @@ function useCallbackController(app: Express) {
           fullTagEmptyElement: true,
         }),
       );
+    },
+  );
+
+  /**
+   * @swagger
+   * /CallBack/GetBalance:
+   *   get:
+   *     summary: get balance callback
+   *     description: third party callback
+   *     parameters:
+   *       - in: query
+   *         name: Method
+   *         type: string
+   *         required: true
+   *       - in: query
+   *         name: balancePackage
+   *         type: string
+   *         required: true
+   *       - in: query
+   *         name: packageId
+   *         type: string
+   *         required: true
+   *       - in: query
+   *         name: dateSent
+   *         type: integer
+   *         required: true
+   *     responses:
+   *       200:
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 StatusCode:
+   *                   type: string
+   *                   description: only 100 is success.
+   *                   example: "100"
+   *                 StatusMessage:
+   *                   type: string
+   *                   description: smessage.
+   *                   example: "message"
+   *                 PackageId:
+   *                   type: string
+   *                   example: "PackageId"
+   *                 Balance:
+   *                   type: integer
+   *                   example: 1000
+   *                 DateReceived:
+   *                   type: integer
+   *                   example: 100000
+   *                 DateSent:
+   *                   type: integer
+   *                   example: 100000
+   */
+  app.get(
+    `/${CONTROLLERNAME}/GetBalance`,
+    async (_req: Request, _res: Response) => {
+      console.log(_req.query);
+
+      const result = GetBalanceCallbackHandler(_req.query as any);
+      return _res.send(result);
     },
   );
 

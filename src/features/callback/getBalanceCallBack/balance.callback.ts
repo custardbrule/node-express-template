@@ -1,4 +1,4 @@
-import CryptoJS from 'crypto-js';
+import { DateHelper, StringHelper } from '@server/utils';
 
 interface GetBalanceCallbackRequest {
   Method: string;
@@ -22,16 +22,28 @@ interface GetBalanceCallbackResponse {
 }
 
 function GetBalanceCallbackHandler(request: GetBalanceCallbackRequest) {
-  const balancePackage = CryptoJS.AES.decrypt(
+  const balancePackage = StringHelper.AESDecrypt(
     request.balancePackage,
     process.env.PARTNERKEY,
   );
-  return balancePackage;
+  const balancePackageObj: BalancePackage = JSON.parse(balancePackage);
+
+  const res: GetBalanceCallbackResponse = {
+    StatusCode: 100,
+    StatusMessage: balancePackageObj.SourceName,
+    PackageId: request.packageId,
+    Balance: 1000,
+    DateReceived: DateHelper.ToTicks(new Date()),
+    DateSent: DateHelper.ToTicks(new Date()),
+  };
+
+  return res;
 }
 
 export type {
   GetBalanceCallbackRequest,
   BalancePackage,
   GetBalanceCallbackResponse,
-  GetBalanceCallbackHandler,
 };
+
+export { GetBalanceCallbackHandler };
