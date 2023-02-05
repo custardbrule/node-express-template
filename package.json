@@ -5,7 +5,7 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn src/index.ts",
-    "test": "jest --config='./jest-config/jest.config.ts'",
+    "test": "jest --config='./jest-config/jest.config.ts' --passWithNoTests",
     "build": "tsc -p tsconfig.json"
   },
   "license": "MIT",

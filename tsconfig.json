@@ -31,6 +31,6 @@
       "@features/*": ["src/features/*"]
     }
   },
-  "include": ["src/**/*", "__tests__/**/*"],
+  "include": ["src/**/*", "__tests__/**/*", "jest-config/**/*"],
   "exclude": ["node_modules", "build"]
 }
