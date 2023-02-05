@@ -22,7 +22,7 @@
     "baseUrl": ".",
     "paths": {
       "@server/*": ["src/*"],
-      "@tests/*": ["__tests__/*"],
+      "@tests/*": ["jest-config/__tests__/*"],
       "@config/*": ["src/config/*"],
       "@domain/*": ["src/domain/*"],
       "@controllers/*": ["src/controllers/*"],
@@ -31,6 +31,6 @@
       "@features/*": ["src/features/*"]
     }
   },
-  "include": ["src/**/*", "__tests__/**/*", "jest-config/**/*"],
+  "include": ["src/**/*", "jest-config/__tests__/**/*", "jest-config/**/*"],
   "exclude": ["node_modules", "build"]
 }
