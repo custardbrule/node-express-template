@@ -4,48 +4,43 @@ export class StringHelper {
   static AESEncrypt(str: string, key: string);
   static AESEncrypt(str: string, key: string, iv: string);
   static AESEncrypt(str: string, key: string, iv?: string) {
-    if (!iv) {
-      const reverse = key.split('').reverse().join('');
-      return CryptoJS.AES.encrypt(str, reverse);
-    }
+    if (!iv) iv = key.split('').reverse().join('');
+    if (key.length !== 16 || iv.length !== 16) return '';
 
-    if (str.length !== 16 || iv.length !== 16) return '';
+    const ckey = CryptoJS.enc.Utf8.parse(key);
+    const civ = CryptoJS.enc.Utf8.parse(iv);
 
-    const sourceBytes = this.ToBytes(str);
-    const ivBytes = this.ToBytes(iv);
-
-    return CryptoJS.AES.encrypt(this.FromBytes(sourceBytes), key, {
-      iv: CryptoJS.lib.WordArray.create(
-        Array.from(ivBytes),
-        ivBytes.byteLength,
-      ),
+    const encrypted = CryptoJS.AES.encrypt(str, ckey, {
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+      iv: civ,
     });
+
+    console.log(
+      'encrypted',
+      encrypted.ciphertext.toString(CryptoJS.enc.Base64),
+    );
+
+    return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
   }
 
+  static AESDecrypt(str: string, key: string);
+  static AESDecrypt(str: string, key: string, iv: string);
   static AESDecrypt(str: string, key: string, iv?: string) {
     if (!iv) iv = key.split('').reverse().join('');
-
     if (key.length !== 16 || iv.length !== 16) return 'invalid';
-    str = 'asdasdasdasdsad';
-    const cstr = CryptoJS.enc.Utf8.parse(str);
+
+    const cstr = CryptoJS.enc.Base64.parse(str);
     const ckey = CryptoJS.enc.Utf8.parse(key);
-    // const civ = CryptoJS.enc.Utf8.parse(iv);
+    const civ = CryptoJS.enc.Utf8.parse(iv);
 
-    const encrypted = CryptoJS.AES.encrypt(cstr, ckey, {
-      mode: CryptoJS.mode.ECB,
+    const decrypted = CryptoJS.AES.decrypt({ ciphertext: cstr } as any, ckey, {
+      mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
-      // iv: civ,
-    }).ciphertext.toString(CryptoJS.enc.Hex);
-
-    const decrypted = CryptoJS.AES.decrypt(encrypted, ckey, {
-      mode: CryptoJS.mode.ECB,
-      padding: CryptoJS.pad.Pkcs7,
-      // iv: civ,
+      iv: civ,
     }).toString(CryptoJS.enc.Utf8);
 
-    console.log({ encrypted, decrypted });
-
-    return '';
+    return decrypted;
   }
 
   static ToBytes(str: string) {
@@ -54,7 +49,6 @@ export class StringHelper {
   }
 
   static FromBytes(bytes: Uint8Array) {
-    const reverses = bytes.reverse();
-    return String.fromCharCode(...reverses);
+    return String.fromCharCode(...bytes);
   }
 }

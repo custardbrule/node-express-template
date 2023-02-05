@@ -2,7 +2,7 @@ import {
   TokenAuthenticationHandler,
   TokenAuthenticationRequest,
 } from '@server/features/callback/tokenAuthentication/token.authentication';
-import { ObjectHelper, StringHelper } from '@server/utils';
+import { ObjectHelper } from '@server/utils';
 import { Express, Response, Request } from 'express';
 import convert from 'xml-js';
 
@@ -69,15 +69,6 @@ function useCallbackController(app: Express) {
       );
     },
   );
-
-  app.get(`/`, (_req: Request, _res: Response) => {
-    const balancePackage = `9CuAok5ayWCJP2kFHKZp6rPjTmUD0jA3Y0JrsEI9/WjuBBJizsaz72j8RePti+v0`;
-    const Partnerkey = '0724955629056261';
-
-    const result = StringHelper.AESDecrypt(balancePackage, Partnerkey);
-
-    _res.send(result);
-  });
 
   return app;
 }
