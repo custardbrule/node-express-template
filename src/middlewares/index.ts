@@ -1,5 +1,13 @@
 import applyErrorHandler from './error.handler.middleware';
-import { applyWinstonLogging } from './logging.middleware';
+import {
+  applyWinstonLogging,
+  applyWinstonErrorLogging,
+} from './logging.middleware';
 import applySwaggerDoc from './swagger.middleware';
 
-export { applyWinstonLogging, applyErrorHandler, applySwaggerDoc };
+export {
+  applyWinstonLogging,
+  applyWinstonErrorLogging,
+  applyErrorHandler,
+  applySwaggerDoc,
+};

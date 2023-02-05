@@ -6,8 +6,8 @@ import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
 import {
-  applyErrorHandler,
   applySwaggerDoc,
+  applyWinstonErrorLogging,
   applyWinstonLogging,
 } from '@server/middlewares';
 import { white_list } from '@server/config';
@@ -37,7 +37,8 @@ app.use(
 
 useController(app);
 
-applyErrorHandler(app);
+// applyErrorHandler(app);
+applyWinstonErrorLogging(app);
 
 app.listen(port, () => {
   if (environment === 'development')

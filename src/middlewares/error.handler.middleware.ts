@@ -10,6 +10,7 @@ function applyErrorHandler(app: Express): void {
       _next: NextFunction,
     ) => {
       if (_err) _res.status(_err.code || 500).send(_err);
+      _next();
     },
   );
 }

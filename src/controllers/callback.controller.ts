@@ -1,8 +1,8 @@
 import {
   TokenAuthenticationHandler,
   TokenAuthenticationRequest,
-} from '@server/features/auth/tokenAuthentication/tokenAuthentication';
-import { ObjectHelper } from '@server/utils';
+} from '@server/features/callback/tokenAuthentication/token.authentication';
+import { ObjectHelper, StringHelper } from '@server/utils';
 import { Express, Response, Request } from 'express';
 import convert from 'xml-js';
 
@@ -29,24 +29,23 @@ function useCallbackController(app: Express) {
    *     responses:
    *       200:
    *         content:
-   *           application/json:
+   *           application/xml:
    *             schema:
    *               type: object
+   *               xml:
+   *                 name: authenticate
    *               properties:
-   *                 data:
-   *                   type: object
-   *                   properties:
-   *                     _id:
-   *                       type: string
-   *                       description: The object's ID.
-   *                       example: "0000-0000-0000-0000"
-   *                     user_id:
-   *                       type: string
-   *                       description: The user's id.
-   *                       example: "0000-0000-0000-0000"
-   *                     title:
-   *                       type: string
-   *                       example: "title"
+   *                 member_id:
+   *                   type: string
+   *                   description: The object's ID.
+   *                   example: "0000-0000-0000-0000"
+   *                 status_code:
+   *                   type: integer
+   *                   description: status_code 0 í success other is failed.
+   *                   example: 1
+   *                 message:
+   *                   type: string
+   *                   example: "message"
    */
   app.get(
     `/${CONTROLLERNAME}/TokenAuth`,
@@ -70,6 +69,15 @@ function useCallbackController(app: Express) {
       );
     },
   );
+
+  app.get(`/`, (_req: Request, _res: Response) => {
+    const balancePackage = `9CuAok5ayWCJP2kFHKZp6rPjTmUD0jA3Y0JrsEI9/WjuBBJizsaz72j8RePti+v0`;
+    const Partnerkey = '0724955629056261';
+
+    const result = StringHelper.AESDecrypt(balancePackage, Partnerkey);
+
+    _res.send(result);
+  });
 
   return app;
 }
