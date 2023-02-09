@@ -28,7 +28,7 @@ function applySwaggerDoc(app: Express) {
         },
       ],
     },
-    apis: ['./src/controllers/*.ts'],
+    apis: ['./src/controllers/*.ts', './src/controllers/api/*.ts'],
   };
 
   const specs = swaggerJsdoc(options);

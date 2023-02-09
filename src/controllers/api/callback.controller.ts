@@ -14,7 +14,7 @@ const router = Router();
 
 /**
  * @swagger
- * /CallBack/TokenAuth:
+ * /api/CallBack/TokenAuth:
  *   get:
  *     summary: token authentication
  *     description: third party authentication
@@ -75,7 +75,7 @@ router.get(
 
 /**
  * @swagger
- * /CallBack/GetBalance:
+ * /api/CallBack/GetBalance:
  *   get:
  *     summary: get balance callback
  *     description: third party callback
@@ -127,8 +127,6 @@ router.get(
 router.get(
   `/${CONTROLLERNAME}/GetBalance`,
   async (_req: Request, _res: Response) => {
-    console.log(_req.query);
-
     const result = GetBalanceCallbackHandler(_req.query as any);
     return _res.send(result);
   },

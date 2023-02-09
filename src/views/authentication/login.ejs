@@ -1,0 +1,38 @@
+<div class="h-100">
+  <form action="/" method="post" title="login form">
+    <input
+      type="text"
+      name="redirectUrl"
+      id="redirectUrl"
+      value="<%= redirectUrl %>"
+      hidden
+    />
+    <div class="form-group">
+      <label for="Username">User name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Username"
+        aria-describedby="UsernameHelp"
+        placeholder="Enter username"
+      />
+      <small id="UsernameHelp" class="form-text text-muted"
+        >Input your username here.</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="Password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="Password"
+        placeholder="Password"
+      />
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="rememberMe" />
+      <label class="form-check-label" for="rememberMe">Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
