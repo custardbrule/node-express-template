@@ -5,21 +5,23 @@ import expressWinston from 'express-winston';
 import { Express, Request, Response } from 'express';
 import { transportConsole, transportFile, transportMongoDb } from '../services';
 
+const format = winston.format.combine(
+  winston.format.errors({ stack: true }),
+  winston.format.colorize({ all: true }),
+  winston.format.label({ label: '[LOGGER]' }),
+  winston.format.timestamp({ format: 'YY-MM-DD HH:mm:ss' }),
+  winston.format.json(),
+  winston.format.printf(
+    (info) =>
+      ` ${info.label}  ${info.timestamp}  ${info.level} : ${info.message}
+            meta: ${JSON.stringify(info.meta, null, 2)}`,
+  ),
+);
+
 function applyWinstonLogging(app: Express): void {
   const logger = expressWinston.logger({
     transports: [transportConsole, transportFile, transportMongoDb],
-    format: winston.format.combine(
-      winston.format.errors({ stack: true }),
-      winston.format.colorize({ all: true }),
-      winston.format.label({ label: '[LOGGER]' }),
-      winston.format.timestamp({ format: 'YY-MM-DD HH:mm:ss' }),
-      winston.format.json(),
-      winston.format.printf(
-        (info) =>
-          ` ${info.label}  ${info.timestamp}  ${info.level} : ${info.message}
-            meta: ${JSON.stringify(info.meta, null, 2)}`,
-      ),
-    ),
+    format: format,
     meta: false,
     msg: 'HTTP  ',
     expressFormat: true,
@@ -35,12 +37,8 @@ function applyWinstonLogging(app: Express): void {
 function applyWinstonErrorLogging(app: Express): void {
   const logger = expressWinston.errorLogger({
     transports: [transportConsole, transportFile, transportMongoDb],
-    format: winston.format.combine(
-      winston.format.errors({ stack: true }),
-      winston.format.colorize({ all: true }),
-      winston.format.timestamp({ format: 'YY-MM-DD HH:mm:ss' }),
-      winston.format.json(),
-    ),
+    format: format,
+    meta: true,
   });
 
   app.use(logger);
