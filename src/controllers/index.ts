@@ -1,10 +1,10 @@
 import { Express } from 'express';
-import useGameLogController from '@server/controllers/gameLog.controller';
-import useCallbackController from './callback.controller';
+import GameLogController from '@server/controllers/gameLog.controller';
+import CallbackController from './callback.controller';
 
 function useController(app: Express) {
-  useGameLogController(app);
-  useCallbackController(app);
+  app.use(GameLogController);
+  app.use(CallbackController);
 }
 
 export default useController;
