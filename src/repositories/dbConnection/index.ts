@@ -2,7 +2,17 @@ import mongoose from 'mongoose';
 
 const mongoString = process.env.MONGODB_CONNSTRING;
 
-mongoose.connect(mongoString);
+mongoose.set({
+  strictQuery: true,
+  'timestamps.createdAt.immutable': true,
+  debug: {
+    color: true,
+  },
+});
+
+mongoose.connect(mongoString, {
+  appName: 'node-be',
+});
 
 const database = mongoose.connection;
 

@@ -1,3 +1,4 @@
+import applyController from './controller.middleware';
 import applyErrorHandler from './error.handler.middleware';
 import {
   applyWinstonLogging,
@@ -10,4 +11,5 @@ export {
   applyWinstonErrorLogging,
   applyErrorHandler,
   applySwaggerDoc,
+  applyController,
 };

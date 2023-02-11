@@ -5,16 +5,10 @@ import bodyParserXml from 'body-parser-xml';
 import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
-import {
-  applySwaggerDoc,
-  applyWinstonErrorLogging,
-  applyWinstonLogging,
-} from '@server/middlewares';
-import { white_list } from '@server/config';
-import useController from '@server/controllers';
+import * as middlewares from '@server/middlewares';
+import * as config from '@server/config';
 // import child_process from 'child_process';
 import expressLayouts from 'express-ejs-layouts';
-import mongoose from 'mongoose';
 
 bodyParserXml(bodyParser);
 const environment = process.env.NODE_ENV || 'development';
@@ -22,14 +16,6 @@ const isDev = environment === 'development';
 
 const app = express();
 const port = process.env.PORT;
-
-mongoose.set({
-  strictQuery: true,
-  'timestamps.createdAt.immutable': true,
-  debug: {
-    color: true,
-  },
-});
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,20 +30,20 @@ app.set('layout', './layouts/full-width');
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-applyWinstonLogging(app);
+middlewares.applyWinstonLogging(app);
 
-if (isDev) applySwaggerDoc(app);
+if (isDev) middlewares.applySwaggerDoc(app);
 
 app.use(
   cors({
-    origin: [`http://localhost:${port}`, ...white_list],
+    origin: [`http://localhost:${port}`, ...config.white_list],
   }),
 );
 
-useController(app);
+middlewares.applyController(app);
 
 // applyErrorHandler(app);
-applyWinstonErrorLogging(app);
+middlewares.applyWinstonErrorLogging(app);
 
 app.listen(port, () => {
   if (isDev) {
@@ -72,3 +58,5 @@ app.listen(port, () => {
     console.log(`app listening on http://localhost:${port}`);
   } else console.log(`app listening on port ${port}`);
 });
+
+export default app;
