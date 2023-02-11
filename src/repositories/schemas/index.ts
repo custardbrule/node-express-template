@@ -1,7 +1,6 @@
-import {
-  GameLogModel,
+export {
   gameLogSchema,
   gameLogSchemaName,
+  GameLogModel,
 } from './gameLog.schema';
-
-export { gameLogSchema, gameLogSchemaName, GameLogModel };
+export { clientSchema, clientSchemaName, ClientModel } from './client.schema';

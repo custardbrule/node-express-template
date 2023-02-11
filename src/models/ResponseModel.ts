@@ -1,6 +1,6 @@
 import { ValidationError } from 'express-validator';
 
-export class ResponseModel<T> {
+export default class ResponseModel<T> {
   data?: T;
   errors?: ValidationError[] | Error[];
   message?: string;

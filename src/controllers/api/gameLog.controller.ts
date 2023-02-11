@@ -5,7 +5,6 @@ import {
 } from '@server/features/game-log/queries/getGameLog.query';
 import { ResponseModel } from '@server/models';
 import { Request, Response, Router } from 'express';
-import { validationResult } from 'express-validator';
 
 const CONTROLLERNAME = 'GameLog';
 
@@ -60,12 +59,6 @@ router.post(
   `/${CONTROLLERNAME}`,
   ValidateParallel(GetGameLogRequestValidator()),
   async (_req: Request, _res: Response) => {
-    const errors = validationResult(_req);
-    if (!errors.isEmpty()) {
-      const errRes = ResponseModel.ErrorResponse(errors.array());
-      return _res.status(400).send(errRes);
-    }
-
     const data = await GetGameLogRequestHandler(_req.body);
     const r = ResponseModel.CreateResponse(data);
     return _res.send(r);

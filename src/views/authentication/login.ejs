@@ -1,5 +1,5 @@
 <div class="h-100">
-  <form action="/" method="post" title="login form">
+  <form action="/authentication/login" method="post" title="login form">
     <input
       type="text"
       name="redirectUrl"
@@ -8,25 +8,27 @@
       hidden
     />
     <div class="form-group">
-      <label for="Username">User name</label>
+      <label for="username">User name</label>
       <input
+        name="username"
         type="text"
         class="form-control"
-        id="Username"
-        aria-describedby="UsernameHelp"
+        id="username"
+        aria-describedby="usernameHelp"
         placeholder="Enter username"
       />
-      <small id="UsernameHelp" class="form-text text-muted"
+      <small id="usernameHelp" class="form-text text-muted"
         >Input your username here.</small
       >
     </div>
     <div class="form-group">
-      <label for="Password">Password</label>
+      <label for="password">Password</label>
       <input
+        name="password"
         type="password"
         class="form-control"
-        id="Password"
-        placeholder="Password"
+        id="password"
+        placeholder="password"
       />
     </div>
     <div class="form-check">

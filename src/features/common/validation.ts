@@ -1,3 +1,4 @@
+import { ResponseModel } from '@server/models';
 import express from 'express';
 import { validationResult, ValidationChain } from 'express-validator';
 // can be reused by many routes
@@ -16,7 +17,7 @@ const ValidateParallel = (validations: ValidationChain[]) => {
       return next();
     }
 
-    res.status(400).json({ errors: errors.array() });
+    res.status(400).json(ResponseModel.ErrorResponse(errors.array()));
   };
 };
 
@@ -37,7 +38,7 @@ const ValidateChain = (validations: ValidationChain[]) => {
       return next();
     }
 
-    res.status(400).json({ errors: errors.array() });
+    res.status(400).json(ResponseModel.ErrorResponse(errors.array()));
   };
 };
 
