@@ -6,7 +6,7 @@ import AuthenticationController from '@server/controllers/oauth/authentication.c
 function applyController(app: Express) {
   app.use('/api', GameLogController);
   app.use('/api', CallbackController);
-  app.use(AuthenticationController);
+  app.use('/oauth', AuthenticationController);
 }
 
 export default applyController;

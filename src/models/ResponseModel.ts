@@ -1,8 +1,12 @@
 import { ValidationError } from 'express-validator';
 
+interface ErrorDetail {
+  [name: string]: string[];
+}
+
 export default class ResponseModel<T> {
   data?: T;
-  errors?: ValidationError[] | Error[];
+  errors?: ErrorDetail[] | ValidationError[];
   message?: string;
   code: number;
   statusCode: number;
@@ -15,12 +19,28 @@ export default class ResponseModel<T> {
   };
 
   static ErrorResponse = (
-    errors: ValidationError[] | Error[],
+    statusCode: number,
+    errors: [string, string[]][],
     message?: string,
   ) => {
     const model = new ResponseModel<null>();
-    model.errors = errors;
+    model.errors = errors.map((e) => {
+      return { e: e[1] };
+    });
     model.message = message;
+    model.statusCode = statusCode;
     return model;
   };
+
+  static ValidationErrorResponses(
+    statusCode: number,
+    errors: ValidationError[],
+    message?: string,
+  ) {
+    const model = new ResponseModel<null>();
+    model.errors = errors;
+    model.message = message;
+    model.statusCode = statusCode;
+    return model;
+  }
 }

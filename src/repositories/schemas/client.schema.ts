@@ -7,7 +7,8 @@ const clientSchema = new Schema({
   client_Id: String,
   client_Secrect: String,
   description: String,
-  audiences: [String],
+  audience: [String],
+  grant_type: [String],
 });
 
 type ClientModel = InferSchemaType<typeof clientSchema>;

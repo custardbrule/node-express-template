@@ -42,8 +42,8 @@ app.use(
 
 middlewares.applyController(app);
 
-// applyErrorHandler(app);
 middlewares.applyWinstonErrorLogging(app);
+middlewares.applyErrorHandler(app);
 
 app.listen(port, () => {
   if (isDev) {

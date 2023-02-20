@@ -17,7 +17,9 @@ const ValidateParallel = (validations: ValidationChain[]) => {
       return next();
     }
 
-    res.status(400).json(ResponseModel.ErrorResponse(errors.array()));
+    res
+      .status(400)
+      .json(ResponseModel.ValidationErrorResponses(400, errors.array()));
   };
 };
 
@@ -38,7 +40,9 @@ const ValidateChain = (validations: ValidationChain[]) => {
       return next();
     }
 
-    res.status(400).json(ResponseModel.ErrorResponse(errors.array()));
+    res
+      .status(400)
+      .json(ResponseModel.ValidationErrorResponses(400, errors.array()));
   };
 };
 

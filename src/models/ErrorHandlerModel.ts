@@ -1,10 +1,10 @@
 class ErrorHandlerModel extends Error {
   code: number;
-  errors: [any];
-  constructor(message: string, code: number, errors?: [any]) {
-    super(message);
+  errors: [string, string[]][];
+  constructor(code: number, errors?: [string, string[]][]) {
+    super(errors?.join('\n'));
     this.code = code;
-    this.errors = errors;
+    this.errors = [...(errors ?? [])];
   }
 }
 
