@@ -63,7 +63,7 @@ async function HandleGrandType(
         },
       });
       const payload: jose.JWTPayload = { ...claims.payload, jti: claims.id };
-      const token = await CreateJWT(payload, process.env.JWT_SECRECT);
+      const token = await CreateJWT(payload, process.env.JWT_SECRET);
       return token;
     }
 
@@ -87,7 +87,7 @@ async function ValidateClientCredentials(token: string) {
   const claims = await ValidateJWT(
     token,
     { issuer: process.env.JWT_ISSUER },
-    process.env.JWT_SECRECT,
+    process.env.JWT_SECRET,
   );
 
   const client = await ClientRepository.findById(claims.payload.sub).exec();

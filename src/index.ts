@@ -7,8 +7,9 @@ import express from 'express';
 import cors from 'cors';
 import * as middlewares from '@server/middlewares';
 import * as config from '@server/config';
-// import child_process from 'child_process';
 import expressLayouts from 'express-ejs-layouts';
+import { UseSocket } from './socket';
+// import { UrlHelper } from './utils';
 
 bodyParserXml(bodyParser);
 const environment = process.env.NODE_ENV || 'development';
@@ -45,18 +46,20 @@ middlewares.applyController(app);
 middlewares.applyWinstonErrorLogging(app);
 middlewares.applyErrorHandler(app);
 
-app.listen(port, () => {
-  if (isDev) {
-    // const url = `http://localhost:${port}/swagger`;
-    // const start =
-    //   process.platform == 'darwin'
-    //     ? 'open'
-    //     : process.platform == 'win32'
-    //     ? 'start'
-    //     : 'xdg-open';
-    // child_process.exec(start + ' ' + url);
-    console.log(`app listening on http://localhost:${port}`);
-  } else console.log(`app listening on port ${port}`);
+// use socket
+// for testing purpose
+app.get('/socket', (_req, _res) => {
+  _res.sendFile(`${__dirname}/public/socket.html`);
 });
+const server = UseSocket(app);
+server.listen(port, () => {
+  console.log(`app listening on port ${port}`);
+  // if (isDev) UrlHelper.OpenBrowser(`http://localhost:${port}/swagger`);
+});
+export default server;
 
-export default app;
+// app.listen(port, () => {
+//   console.log(`app listening on port ${port}`);
+//   if (isDev) UrlHelper.OpenBrowser(`http://localhost:${port}/swagger`);
+// });
+// export default app;

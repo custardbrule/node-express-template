@@ -52,6 +52,7 @@
     "mongoose": "^6.9.0",
     "mongoose-paginate-v2": "^1.7.1",
     "redis": "^4.6.3",
+    "socket.io": "^4.6.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.0",
     "winston": "^3.8.2",
