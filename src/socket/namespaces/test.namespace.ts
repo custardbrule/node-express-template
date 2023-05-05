@@ -4,10 +4,10 @@ function ApplyTestNameSpace(io: Server) {
   const testNameSpace = io.of('/test');
   testNameSpace.on('connection', (socket) => {
     console.log('testNameSpace');
-    socket.on('hello', (a) => {
-      console.log(a);
+    socket.on('hello', (message) => {
+      console.log(message);
+      socket.emit('hello', message);
     });
-    io.emit('hello');
   });
   return io;
 }

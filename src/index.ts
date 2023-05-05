@@ -51,6 +51,7 @@ middlewares.applyErrorHandler(app);
 app.get('/socket', (_req, _res) => {
   _res.sendFile(`${__dirname}/public/socket.html`);
 });
+
 const server = UseSocket(app);
 server.listen(port, () => {
   console.log(`app listening on port ${port}`);

@@ -1,23 +1,17 @@
-import * as env from 'dotenv';
-env.config({ path: './.env' });
 import { Express } from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import ApplyTestNameSpace from './namespaces/test.namespace';
+import ApplyDefaultNameSpace from './namespaces/default.namespace';
 
 function UseSocket(app: Express) {
   const server = http.createServer(app);
   const io = new Server(server, {
     serveClient: false,
+    path: '/socket-entry',
   });
 
-  io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-      io.emit('chat message', msg);
-    });
-  });
-
-  ApplyTestNameSpace(io);
+  io.applyFunction(ApplyDefaultNameSpace).applyFunction(ApplyTestNameSpace);
 
   return server;
 }
