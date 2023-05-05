@@ -6,7 +6,7 @@ declare module 'socket.io' {
   }
 }
 
-Server.prototypes.applyFunction = function (func, params) {
+Server.prototype.applyFunction = function (func, params) {
   if (params) func(this, params);
   else func(this);
   return this;
