@@ -1,8 +1,9 @@
 import { Express } from 'express';
 import http from 'http';
-import { Server } from 'socket.io';
 import ApplyTestNameSpace from './namespaces/test.namespace';
 import ApplyDefaultNameSpace from './namespaces/default.namespace';
+import { Server } from 'socket.io';
+import '@server/utils/extension/server.extension';
 
 function UseSocket(app: Express) {
   const server = http.createServer(app);

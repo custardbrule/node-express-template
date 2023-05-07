@@ -10,11 +10,15 @@ mongoose.set({
   },
 });
 
-mongoose.connect(mongoString, {
+// mongoose.connect(mongoString, {
+//   appName: 'node-be',
+// });
+
+// const database = mongoose.connection;
+
+const database = mongoose.createConnection(mongoString, {
   appName: 'node-be',
 });
-
-const database = mongoose.connection;
 
 database.on('error', (error) => {
   console.log(error);
