@@ -10,6 +10,8 @@ import * as config from '@server/config';
 import expressLayouts from 'express-ejs-layouts';
 import { UseSocket } from './socket';
 import helmet from 'helmet';
+import http from 'http';
+import '@extension/http.extension';
 // import { UrlHelper } from './utils';
 
 bodyParserXml(bodyParser);
@@ -35,8 +37,7 @@ app.set('layout', './layouts/full-width');
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-app.applyFunction(middlewares.applyWinstonLogging);
-// middlewares.applyWinstonLogging(app);
+middlewares.applyWinstonLogging(app);
 
 if (isDev) middlewares.applySwaggerDoc(app);
 
@@ -57,15 +58,14 @@ app.get('/socket', (_req, _res) => {
   _res.sendFile(`${__dirname}/public/socket.html`);
 });
 
-const server = UseSocket(app);
-server.listen(port, () => {
-  console.log(`app listening on port ${port}`);
-  // if (isDev) UrlHelper.OpenBrowser(`http://localhost:${port}/swagger`);
-});
-export default server;
+const server = http.createServer(app);
+server
+  // config socket
+  .applyFunction(UseSocket)
+  // run app
+  .listen(port, () => {
+    console.log(`app listening on port ${port}`);
+    // if (isDev) UrlHelper.OpenBrowser(`http://localhost:${port}/swagger`);
+  });
 
-// app.listen(port, () => {
-//   console.log(`app listening on port ${port}`);
-//   if (isDev) UrlHelper.OpenBrowser(`http://localhost:${port}/swagger`);
-// });
-// export default app;
+export default server;
