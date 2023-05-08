@@ -9,6 +9,7 @@ import * as middlewares from '@server/middlewares';
 import * as config from '@server/config';
 import expressLayouts from 'express-ejs-layouts';
 import { UseSocket } from './socket';
+import helmet from 'helmet';
 // import { UrlHelper } from './utils';
 
 bodyParserXml(bodyParser);
@@ -17,6 +18,9 @@ const isDev = environment === 'development';
 
 const app = express();
 const port = process.env.PORT;
+
+// Helmet helps secure Express apps by setting HTTP response headers
+app.use(helmet());
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,7 +35,8 @@ app.set('layout', './layouts/full-width');
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-middlewares.applyWinstonLogging(app);
+app.applyFunction(middlewares.applyWinstonLogging);
+// middlewares.applyWinstonLogging(app);
 
 if (isDev) middlewares.applySwaggerDoc(app);
 

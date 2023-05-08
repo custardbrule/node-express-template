@@ -67,7 +67,12 @@
     ></script>
 
     <script>
-      var socket = io();
+      var socket = io('http://localhost:3000', {
+        auth: {
+          token: 'abc',
+        },
+        path: '/socket-entry',
+      });
 
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');

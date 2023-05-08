@@ -37,6 +37,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@socket.io/admin-ui": "^0.5.1",
     "body-parser": "^1.20.2",
     "body-parser-xml": "^2.0.5",
     "cors": "^2.8.5",
@@ -47,6 +48,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-validator": "^7.0.1",
     "express-winston": "^4.2.0",
+    "helmet": "^7.0.0",
     "jose": "^4.14.4",
     "luxon": "^3.3.0",
     "mongodb": "^5.4.0",
