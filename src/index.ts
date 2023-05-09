@@ -12,6 +12,7 @@ import { UseSocket } from './socket';
 import helmet from 'helmet';
 import http from 'http';
 import '@extension/http.extension';
+import UseGql from './gql';
 // import { UrlHelper } from './utils';
 
 bodyParserXml(bodyParser);
@@ -22,7 +23,9 @@ const app = express();
 const port = process.env.PORT;
 
 // Helmet helps secure Express apps by setting HTTP response headers
-app.use(helmet());
+app.use(
+  helmet({ contentSecurityPolicy: { useDefaults: false, reportOnly: true } }),
+);
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -57,6 +60,9 @@ middlewares.applyErrorHandler(app);
 app.get('/socket', (_req, _res) => {
   _res.sendFile(`${__dirname}/public/socket.html`);
 });
+
+// gql route
+UseGql(app);
 
 const server = http.createServer(app);
 server
